@@ -1,7 +1,7 @@
 # Social Layer API Documentation
 
-**Base Path:** `https://api.sola.day/api`  
-**Format:** JSON  
+**Base Path:** `https://api.sola.day/api`
+**Format:** JSON
 **Versioning:** via header, vendor: `sola`
 
 ---
@@ -22,12 +22,21 @@ Most endpoints require authentication via an `auth_token` parameter or a Bearer 
 - **Description:** Get the current authenticated user's profile.
 - **Auth:** Required
 
+```
+GET https://api.sola.day/api/profile/me
+Authorization: Bearer <token>
+```
+
 #### Get Profile by Email
 
 - **GET** `/profile/get_by_email`
 - **Params:**
   - `email` (string, required)
 - **Description:** Get a profile by email.
+
+```
+GET https://api.sola.day/api/profile/get_by_email?email=alice@example.com
+```
 
 #### Get Profile by Handle
 
@@ -36,12 +45,24 @@ Most endpoints require authentication via an `auth_token` parameter or a Bearer 
   - `handle` (string, required)
 - **Description:** Get a profile by handle.
 
+```
+GET https://api.sola.day/api/profile/get_by_handle?handle=alice
+```
+
 #### Get Profile by ID or Handle
 
 - **GET** `/profile/get`
 - **Params:**
   - `id` (string, required) — profile ID or handle
 - **Description:** Get a profile by ID or handle.
+
+```
+GET https://api.sola.day/api/profile/get?id=1
+```
+_or_
+```
+GET https://api.sola.day/api/profile/get?id=alice
+```
 
 ---
 
@@ -53,6 +74,10 @@ Most endpoints require authentication via an `auth_token` parameter or a Bearer 
 - **Params:**
   - `id` (integer, required)
 - **Description:** Get event details by ID.
+
+```
+GET https://api.sola.day/api/event/get?id=14760
+```
 
 #### Discover Events
 
@@ -130,6 +155,10 @@ Most endpoints require authentication via an `auth_token` parameter or a Bearer 
 - **Auth:** Optional, but required for private/manager views
 - **Description:** List events in a group with various filters.
 
+```
+GET https://api.sola.day/api/event/list?group_id=3579&search_title=party&start_date=2025-06-01&end_date=2025-06-03&limit=20&page=1&with_attending=true
+```
+
 ## Error Handling
 
 - **403 Forbidden:** Invalid or missing authentication token.
@@ -143,5 +172,3 @@ Most endpoints require authentication via an `auth_token` parameter or a Bearer 
 - Some endpoints require the user to be authenticated; others are public.
 - Filtering and search parameters are available for event listing endpoints.
 - Entities are returned in a structured format as described above.
-
-
